@@ -17,7 +17,7 @@
 **Using self-bots is against the discord ToS, if you get caught your account will be banned!**
 
 
-## 📕 djs-selfbot change.log
+## 📕 djs-selfbot change.log - branch release
 ```diff
 - [13.6.1] Remove Rich Embeds For User Accounts
 + [13.6.1] Update: 13.5.0 -> 13.6.1
