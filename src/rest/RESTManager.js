@@ -27,16 +27,12 @@ class RESTManager {
   get api() {
     return routeBuilder(this);
   }
-  //https://github.com/ItsBhuvnesh/djs-selfbot/blob/b24f44ac7a660dd43f930a3df39a8296f4e1f30a/src/rest/RESTManager.js#L30
-  // selfbot 
   getAuth() {
-    if (this.client.token && this.client.user && this.client.user.bot) { //-
-      return `Bot ${this.client.token}`;  //-
-    } else if (this.client.token) {       //-
-      return this.client.token;           //-
-    }                                     //-
-    //const token = this.client.token ?? this.client.accessToken;
-    //if (token) return `Bot ${token}`;
+    if (this.client.token && this.client.user && this.client.user.bot) {
+      return `Bot ${this.client.token}`;
+    } else if (this.client.token) {
+      return this.client.token;
+    }
     throw new Error('TOKEN_MISSING');
   }
 

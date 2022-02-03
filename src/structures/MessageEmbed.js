@@ -58,7 +58,7 @@ class MessageEmbed {
      * @deprecated
      */
     this.type = data.type ?? 'rich';
-    
+
     /**
      * The title of this embed
      * @type {?string}

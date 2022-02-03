@@ -13,10 +13,9 @@ const AssetTypes = Object.keys(ClientApplicationAssetTypes);
 class Application extends Base {
   constructor(client, data) {
     super(client);
-    // selfbot 
-    if (data) { // -
+    if (data) {
       this._patch(data);
-    }           // -
+    }
   }
 
   _patch(data) {

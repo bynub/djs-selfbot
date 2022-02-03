@@ -203,18 +203,18 @@ class MessagePayload {
       attachments: this.options.attachments,
       sticker_ids: this.options.stickers?.map(sticker => sticker.id ?? sticker),
     };
-    
-    if(this.data.embeds) {
+
+    if (this.data.embeds) {
       this.data.embeds = undefined;
       process.emitWarning(
         'MessageEmbed is deprecated for user accounts. Use normal messages instead.',
         'DeprecationError',
       );
-      if(!this.data.content) {
+      if (!this.data.content) {
         this.data.content = 'MessageEmbed is deprecated for user accounts. Use normal messages instead.';
       }
     }
-    
+
     return this;
   }
 
