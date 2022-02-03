@@ -1,8 +1,11 @@
-'use strict';
+"use strict";
 
-const { ClientApplicationAssetTypes, Endpoints } = require('../../util/Constants');
-const SnowflakeUtil = require('../../util/SnowflakeUtil');
-const Base = require('../Base');
+const {
+  ClientApplicationAssetTypes,
+  Endpoints,
+} = require("../../util/Constants");
+const SnowflakeUtil = require("../../util/SnowflakeUtil");
+const Base = require("../Base");
 
 const AssetTypes = Object.keys(ClientApplicationAssetTypes);
 
@@ -25,7 +28,7 @@ class Application extends Base {
      */
     this.id = data.id;
 
-    if ('name' in data) {
+    if ("name" in data) {
       /**
        * The name of the application
        * @type {?string}
@@ -35,7 +38,7 @@ class Application extends Base {
       this.name ??= null;
     }
 
-    if ('description' in data) {
+    if ("description" in data) {
       /**
        * The application's description
        * @type {?string}
@@ -45,7 +48,7 @@ class Application extends Base {
       this.description ??= null;
     }
 
-    if ('icon' in data) {
+    if ("icon" in data) {
       /**
        * The application's icon hash
        * @type {?string}
@@ -91,7 +94,11 @@ class Application extends Base {
    */
   coverURL({ format, size } = {}) {
     if (!this.cover) return null;
-    return Endpoints.CDN(this.client.options.http.cdn).AppIcon(this.id, this.cover, { format, size });
+    return Endpoints.CDN(this.client.options.http.cdn).AppIcon(
+      this.id,
+      this.cover,
+      { format, size }
+    );
   }
 
   /**
@@ -107,8 +114,10 @@ class Application extends Base {
    * @returns {Promise<Array<ApplicationAsset>>}
    */
   async fetchAssets() {
-    const assets = await this.client.api.oauth2.applications(this.id).assets.get();
-    return assets.map(a => ({
+    const assets = await this.client.api.oauth2
+      .applications(this.id)
+      .assets.get();
+    return assets.map((a) => ({
       id: a.id,
       name: a.name,
       type: AssetTypes[a.type - 1],
