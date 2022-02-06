@@ -2,19 +2,7 @@
   "name": "@imxnoobx/djs-selfbot",
   "version": "13.6.1",
   "description": "A powerful library for interacting with the Discord API",
-  "scripts": {
-    "test": "npm run lint && npm run docs:test && npm run lint:typings && npm run test:typescript",
-    "test:typescript": "tsc --noEmit && tsd",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "lint:typings": "tslint typings/index.d.ts",
-    "format": "prettier --write src/**/*.js typings/**/*.ts",
-    "prepare": "is-ci || husky install",
-    "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
-    "docs:test": "docgen --source src --custom docs/index.yml",
-    "prepublishOnly": "npm run test",
-    "changelog": "git cliff --prepend CHANGELOG.md -l"
-  },
+  "scripts": {},
   "main": "./src/index.js",
   "types": "./typings/index.d.ts",
   "files": [

@@ -1,5 +1,7 @@
 # Packages
 node_modules/
+.husky/
+.github/
 
 # Log files
 logs/
