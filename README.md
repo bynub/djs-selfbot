@@ -65,3 +65,20 @@ pnpm add djs-selfbot
 
 ### 🌠 Extensions
 - [RPC](https://www.npmjs.com/package/discord-rpc) ([source](https://github.com/discordjs/RPC))
+
+### 🎨 Credits
+<details>
+  <summary>Official discord.js developers</summary>
+    <li>
+      <a href="https://github.com/discordjs/discord.js/graphs/contributors">Contributors</a> - Making All The discord.js api 
+    </li>
+</details>
+<details>
+  <summary>djs-selfbot</summary>
+  <li>
+    <a href="https://github.com/ItsBhuvnesh" >ItsBhuvnesh</a> - Allowing user accounts to use the api
+  </li>
+  <li>
+    <a href="https://github.com/IMXNOOBX">IMXNOOBX</a> - Update to the latest, Disable Embeds For User Accounts 
+  </li>
+</details>
