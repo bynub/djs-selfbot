@@ -1,7 +1,7 @@
 {
   "name": "djs-selfbot",
   "version": "13.6.1",
-  "description": "A powerful library for interacting with the Discord API",
+  "description": "A modified version of discord.js that supports user accounts",
   "scripts": {
     "test": "npm run lint && npm run docs:test && npm run lint:typings && npm run test:typescript",
     "test:typescript": "tsc --noEmit && tsd",
