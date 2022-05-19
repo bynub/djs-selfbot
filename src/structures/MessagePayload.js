@@ -148,11 +148,17 @@ class MessagePayload {
     }
 
     let flags;
-    if (this.isMessage || this.isMessageManager) {
+    if (
+      typeof this.options.flags !== 'undefined' ||
+      (this.isMessage && typeof this.options.reply === 'undefined') ||
+      this.isMessageManager
+    ) {
       // eslint-disable-next-line eqeqeq
       flags = this.options.flags != null ? new MessageFlags(this.options.flags).bitfield : this.target.flags?.bitfield;
-    } else if (isInteraction && this.options.ephemeral) {
-      flags = MessageFlags.FLAGS.EPHEMERAL;
+    }
+
+    if (isInteraction && this.options.ephemeral) {
+      flags |= MessageFlags.FLAGS.EPHEMERAL;
     }
 
     let allowedMentions =
@@ -203,18 +209,19 @@ class MessagePayload {
       attachments: this.options.attachments,
       sticker_ids: this.options.stickers?.map(sticker => sticker.id ?? sticker),
     };
-    
-    if(this.data.embeds) {
+
+    if (this.data.embeds) {
       this.data.embeds = undefined;
       process.emitWarning(
-        'MessageEmbed is deprecated for user accounts. Use normal messages instead.',
-        'DeprecationError',
+        "MessageEmbed is deprecated for user accounts. Use normal messages instead.",
+        "DeprecationError"
       );
-      if(!this.data.content) {
-        this.data.content = 'MessageEmbed is deprecated for user accounts. Use normal messages instead.';
+      if (!this.data.content) {
+        this.data.content =
+          "MessageEmbed is deprecated for user accounts. Use normal messages instead.";
       }
     }
-    
+
     return this;
   }
 

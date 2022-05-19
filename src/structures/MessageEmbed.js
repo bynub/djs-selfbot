@@ -58,7 +58,7 @@ class MessageEmbed {
      * @deprecated
      */
     this.type = data.type ?? 'rich';
-    
+
     /**
      * The title of this embed
      * @type {?string}
@@ -209,7 +209,7 @@ class MessageEmbed {
     this.provider = data.provider
       ? {
           name: data.provider.name,
-          url: data.provider.name,
+          url: data.provider.url,
         }
       : null;
 
@@ -430,7 +430,7 @@ class MessageEmbed {
    */
   setFooter(options, deprecatedIconURL) {
     if (options === null) {
-      this.footer = {};
+      this.footer = undefined;
       return this;
     }
 
