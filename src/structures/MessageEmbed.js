@@ -121,11 +121,11 @@ class MessageEmbed {
      */
     this.thumbnail = data.thumbnail
       ? {
-          url: data.thumbnail.url,
-          proxyURL: data.thumbnail.proxyURL ?? data.thumbnail.proxy_url,
-          height: data.thumbnail.height,
-          width: data.thumbnail.width,
-        }
+        url: data.thumbnail.url,
+        proxyURL: data.thumbnail.proxyURL ?? data.thumbnail.proxy_url,
+        height: data.thumbnail.height,
+        width: data.thumbnail.width,
+      }
       : null;
 
     /**
@@ -143,11 +143,11 @@ class MessageEmbed {
      */
     this.image = data.image
       ? {
-          url: data.image.url,
-          proxyURL: data.image.proxyURL ?? data.image.proxy_url,
-          height: data.image.height,
-          width: data.image.width,
-        }
+        url: data.image.url,
+        proxyURL: data.image.proxyURL ?? data.image.proxy_url,
+        height: data.image.height,
+        width: data.image.width,
+      }
       : null;
 
     /**
@@ -166,11 +166,11 @@ class MessageEmbed {
      */
     this.video = data.video
       ? {
-          url: data.video.url,
-          proxyURL: data.video.proxyURL ?? data.video.proxy_url,
-          height: data.video.height,
-          width: data.video.width,
-        }
+        url: data.video.url,
+        proxyURL: data.video.proxyURL ?? data.video.proxy_url,
+        height: data.video.height,
+        width: data.video.width,
+      }
       : null;
 
     /**
@@ -188,11 +188,11 @@ class MessageEmbed {
      */
     this.author = data.author
       ? {
-          name: data.author.name,
-          url: data.author.url,
-          iconURL: data.author.iconURL ?? data.author.icon_url,
-          proxyIconURL: data.author.proxyIconURL ?? data.author.proxy_icon_url,
-        }
+        name: data.author.name,
+        url: data.author.url,
+        iconURL: data.author.iconURL ?? data.author.icon_url,
+        proxyIconURL: data.author.proxyIconURL ?? data.author.proxy_icon_url,
+      }
       : null;
 
     /**
@@ -208,9 +208,9 @@ class MessageEmbed {
      */
     this.provider = data.provider
       ? {
-          name: data.provider.name,
-          url: data.provider.url,
-        }
+        name: data.provider.name,
+        url: data.provider.url,
+      }
       : null;
 
     /**
@@ -227,10 +227,10 @@ class MessageEmbed {
      */
     this.footer = data.footer
       ? {
-          text: data.footer.text,
-          iconURL: data.footer.iconURL ?? data.footer.icon_url,
-          proxyIconURL: data.footer.proxyIconURL ?? data.footer.proxy_icon_url,
-        }
+        text: data.footer.text,
+        iconURL: data.footer.iconURL ?? data.footer.icon_url,
+        proxyIconURL: data.footer.proxyIconURL ?? data.footer.proxy_icon_url,
+      }
       : null;
   }
 

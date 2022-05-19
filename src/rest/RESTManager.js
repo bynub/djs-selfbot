@@ -34,7 +34,7 @@ class RESTManager {
     } else if (this.client.token) {
       return this.client.token;
     }
-    throw new Error("TOKEN_MISSING");
+    throw new Error('TOKEN_MISSING');
   }
 
   get cdn() {

@@ -213,12 +213,11 @@ class MessagePayload {
     if (this.data.embeds) {
       this.data.embeds = undefined;
       process.emitWarning(
-        "MessageEmbed is deprecated for user accounts. Use normal messages instead.",
-        "DeprecationError"
+        'MessageEmbed is deprecated for user accounts. Use normal messages instead.',
+        'DeprecationError',
       );
       if (!this.data.content) {
-        this.data.content =
-          "MessageEmbed is deprecated for user accounts. Use normal messages instead.";
+        this.data.content = 'MessageEmbed is deprecated for user accounts. Use normal messages instead.';
       }
     }
 
