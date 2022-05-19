@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
-const {
-  ClientApplicationAssetTypes,
-  Endpoints,
-} = require("../../util/Constants");
-const SnowflakeUtil = require("../../util/SnowflakeUtil");
-const Base = require("../Base");
+const process = require('node:process');
+const { ClientApplicationAssetTypes, Endpoints } = require('../../util/Constants');
+const SnowflakeUtil = require('../../util/SnowflakeUtil');
+const Base = require('../Base');
 
 const AssetTypes = Object.keys(ClientApplicationAssetTypes);
+
+let deprecationEmittedForFetchAssets = false;
 
 /**
  * Represents an OAuth2 Application.
@@ -16,9 +16,7 @@ const AssetTypes = Object.keys(ClientApplicationAssetTypes);
 class Application extends Base {
   constructor(client, data) {
     super(client);
-    if (data) {
-      this._patch(data);
-    }
+    this._patch(data);
   }
 
   _patch(data) {
@@ -28,7 +26,7 @@ class Application extends Base {
      */
     this.id = data.id;
 
-    if ("name" in data) {
+    if ('name' in data) {
       /**
        * The name of the application
        * @type {?string}
@@ -38,7 +36,7 @@ class Application extends Base {
       this.name ??= null;
     }
 
-    if ("description" in data) {
+    if ('description' in data) {
       /**
        * The application's description
        * @type {?string}
@@ -48,7 +46,7 @@ class Application extends Base {
       this.description ??= null;
     }
 
-    if ("icon" in data) {
+    if ('icon' in data) {
       /**
        * The application's icon hash
        * @type {?string}
@@ -94,11 +92,7 @@ class Application extends Base {
    */
   coverURL({ format, size } = {}) {
     if (!this.cover) return null;
-    return Endpoints.CDN(this.client.options.http.cdn).AppIcon(
-      this.id,
-      this.cover,
-      { format, size }
-    );
+    return Endpoints.CDN(this.client.options.http.cdn).AppIcon(this.id, this.cover, { format, size });
   }
 
   /**
@@ -112,12 +106,20 @@ class Application extends Base {
   /**
    * Gets the application's rich presence assets.
    * @returns {Promise<Array<ApplicationAsset>>}
+   * @deprecated This will be removed in the next major as it is unsupported functionality.
    */
   async fetchAssets() {
-    const assets = await this.client.api.oauth2
-      .applications(this.id)
-      .assets.get();
-    return assets.map((a) => ({
+    if (!deprecationEmittedForFetchAssets) {
+      process.emitWarning(
+        'Application#fetchAssets is deprecated as it is unsupported and will be removed in the next major version.',
+        'DeprecationWarning',
+      );
+
+      deprecationEmittedForFetchAssets = true;
+    }
+
+    const assets = await this.client.api.oauth2.applications(this.id).assets.get();
+    return assets.map(a => ({
       id: a.id,
       name: a.name,
       type: AssetTypes[a.type - 1],

@@ -1,28 +1,25 @@
-"use strict";
+'use strict';
 
-const { setInterval } = require("node:timers");
-const { Collection } = require("@discordjs/collection");
-const APIRequest = require("./APIRequest");
-const routeBuilder = require("./APIRouter");
-const RequestHandler = require("./RequestHandler");
-const { Error } = require("../errors");
-const { Endpoints } = require("../util/Constants");
+const { setInterval } = require('node:timers');
+const { Collection } = require('@discordjs/collection');
+const APIRequest = require('./APIRequest');
+const routeBuilder = require('./APIRouter');
+const RequestHandler = require('./RequestHandler');
+const { Error } = require('../errors');
+const { Endpoints } = require('../util/Constants');
 
 class RESTManager {
   constructor(client) {
     this.client = client;
     this.handlers = new Collection();
     this.versioned = true;
-    this.globalLimit =
-      client.options.restGlobalRateLimit > 0
-        ? client.options.restGlobalRateLimit
-        : Infinity;
+    this.globalLimit = client.options.restGlobalRateLimit > 0 ? client.options.restGlobalRateLimit : Infinity;
     this.globalRemaining = this.globalLimit;
     this.globalReset = null;
     this.globalDelay = null;
     if (client.options.restSweepInterval > 0) {
       this.sweepInterval = setInterval(() => {
-        this.handlers.sweep((handler) => handler._inactive);
+        this.handlers.sweep(handler => handler._inactive);
       }, client.options.restSweepInterval * 1_000).unref();
     }
   }

@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const { Buffer } = require("node:buffer");
-const BaseMessageComponent = require("./BaseMessageComponent");
-const MessageEmbed = require("./MessageEmbed");
-const { RangeError } = require("../errors");
-const DataResolver = require("../util/DataResolver");
-const MessageFlags = require("../util/MessageFlags");
-const Util = require("../util/Util");
+const { Buffer } = require('node:buffer');
+const BaseMessageComponent = require('./BaseMessageComponent');
+const MessageEmbed = require('./MessageEmbed');
+const { RangeError } = require('../errors');
+const DataResolver = require('../util/DataResolver');
+const MessageFlags = require('../util/MessageFlags');
+const Util = require('../util/Util');
 
 /**
  * Represents a message to be sent to the API.
@@ -55,11 +55,9 @@ class MessagePayload {
    * @readonly
    */
   get isWebhook() {
-    const Webhook = require("./Webhook");
-    const WebhookClient = require("../client/WebhookClient");
-    return (
-      this.target instanceof Webhook || this.target instanceof WebhookClient
-    );
+    const Webhook = require('./Webhook');
+    const WebhookClient = require('../client/WebhookClient');
+    return this.target instanceof Webhook || this.target instanceof WebhookClient;
   }
 
   /**
@@ -68,8 +66,8 @@ class MessagePayload {
    * @readonly
    */
   get isUser() {
-    const User = require("./User");
-    const { GuildMember } = require("./GuildMember");
+    const User = require('./User');
+    const { GuildMember } = require('./GuildMember');
     return this.target instanceof User || this.target instanceof GuildMember;
   }
 
@@ -79,7 +77,7 @@ class MessagePayload {
    * @readonly
    */
   get isMessage() {
-    const { Message } = require("./Message");
+    const { Message } = require('./Message');
     return this.target instanceof Message;
   }
 
@@ -89,7 +87,7 @@ class MessagePayload {
    * @readonly
    */
   get isMessageManager() {
-    const MessageManager = require("../managers/MessageManager");
+    const MessageManager = require('../managers/MessageManager');
     return this.target instanceof MessageManager;
   }
 
@@ -99,12 +97,9 @@ class MessagePayload {
    * @readonly
    */
   get isInteraction() {
-    const Interaction = require("./Interaction");
-    const InteractionWebhook = require("./InteractionWebhook");
-    return (
-      this.target instanceof Interaction ||
-      this.target instanceof InteractionWebhook
-    );
+    const Interaction = require('./Interaction');
+    const InteractionWebhook = require('./InteractionWebhook');
+    return this.target instanceof Interaction || this.target instanceof InteractionWebhook;
   }
 
   /**
@@ -114,14 +109,9 @@ class MessagePayload {
   makeContent() {
     let content;
     if (this.options.content === null) {
-      content = "";
-    } else if (typeof this.options.content !== "undefined") {
-      content = Util.verifyString(
-        this.options.content,
-        RangeError,
-        "MESSAGE_CONTENT_TYPE",
-        false
-      );
+      content = '';
+    } else if (typeof this.options.content !== 'undefined') {
+      content = Util.verifyString(this.options.content, RangeError, 'MESSAGE_CONTENT_TYPE', false);
     }
 
     return content;
@@ -140,21 +130,15 @@ class MessagePayload {
     const tts = Boolean(this.options.tts);
 
     let nonce;
-    if (typeof this.options.nonce !== "undefined") {
+    if (typeof this.options.nonce !== 'undefined') {
       nonce = this.options.nonce;
       // eslint-disable-next-line max-len
-      if (
-        typeof nonce === "number"
-          ? !Number.isInteger(nonce)
-          : typeof nonce !== "string"
-      ) {
-        throw new RangeError("MESSAGE_NONCE_TYPE");
+      if (typeof nonce === 'number' ? !Number.isInteger(nonce) : typeof nonce !== 'string') {
+        throw new RangeError('MESSAGE_NONCE_TYPE');
       }
     }
 
-    const components = this.options.components?.map((c) =>
-      BaseMessageComponent.create(c).toJSON()
-    );
+    const components = this.options.components?.map(c => BaseMessageComponent.create(c).toJSON());
 
     let username;
     let avatarURL;
@@ -164,18 +148,21 @@ class MessagePayload {
     }
 
     let flags;
-    if (this.isMessage || this.isMessageManager) {
+    if (
+      typeof this.options.flags !== 'undefined' ||
+      (this.isMessage && typeof this.options.reply === 'undefined') ||
+      this.isMessageManager
+    ) {
       // eslint-disable-next-line eqeqeq
-      flags =
-        this.options.flags != null
-          ? new MessageFlags(this.options.flags).bitfield
-          : this.target.flags?.bitfield;
-    } else if (isInteraction && this.options.ephemeral) {
-      flags = MessageFlags.FLAGS.EPHEMERAL;
+      flags = this.options.flags != null ? new MessageFlags(this.options.flags).bitfield : this.target.flags?.bitfield;
+    }
+
+    if (isInteraction && this.options.ephemeral) {
+      flags |= MessageFlags.FLAGS.EPHEMERAL;
     }
 
     let allowedMentions =
-      typeof this.options.allowedMentions === "undefined"
+      typeof this.options.allowedMentions === 'undefined'
         ? this.target.client.options.allowedMentions
         : this.options.allowedMentions;
 
@@ -186,17 +173,13 @@ class MessagePayload {
     }
 
     let message_reference;
-    if (typeof this.options.reply === "object") {
+    if (typeof this.options.reply === 'object') {
       const reference = this.options.reply.messageReference;
-      const message_id = this.isMessage
-        ? reference.id ?? reference
-        : this.target.messages.resolveId(reference);
+      const message_id = this.isMessage ? reference.id ?? reference : this.target.messages.resolveId(reference);
       if (message_id) {
         message_reference = {
           message_id,
-          fail_if_not_exists:
-            this.options.reply.failIfNotExists ??
-            this.target.client.options.failIfNotExists,
+          fail_if_not_exists: this.options.reply.failIfNotExists ?? this.target.client.options.failIfNotExists,
         };
       }
     }
@@ -215,23 +198,16 @@ class MessagePayload {
       content,
       tts,
       nonce,
-      embeds: this.options.embeds?.map((embed) =>
-        new MessageEmbed(embed).toJSON()
-      ),
+      embeds: this.options.embeds?.map(embed => new MessageEmbed(embed).toJSON()),
       components,
       username,
       avatar_url: avatarURL,
       allowed_mentions:
-        typeof content === "undefined" &&
-        typeof message_reference === "undefined"
-          ? undefined
-          : allowedMentions,
+        typeof content === 'undefined' && typeof message_reference === 'undefined' ? undefined : allowedMentions,
       flags,
       message_reference,
       attachments: this.options.attachments,
-      sticker_ids: this.options.stickers?.map(
-        (sticker) => sticker.id ?? sticker
-      ),
+      sticker_ids: this.options.stickers?.map(sticker => sticker.id ?? sticker),
     };
 
     if (this.data.embeds) {
@@ -256,10 +232,7 @@ class MessagePayload {
   async resolveFiles() {
     if (this.files) return this;
 
-    this.files = await Promise.all(
-      this.options.files?.map((file) => this.constructor.resolveFile(file)) ??
-        []
-    );
+    this.files = await Promise.all(this.options.files?.map(file => this.constructor.resolveFile(file)) ?? []);
     return this;
   }
 
@@ -272,8 +245,8 @@ class MessagePayload {
     let attachment;
     let name;
 
-    const findName = (thing) => {
-      if (typeof thing === "string") {
+    const findName = thing => {
+      if (typeof thing === 'string') {
         return Util.basename(thing);
       }
 
@@ -281,13 +254,11 @@ class MessagePayload {
         return Util.basename(thing.path);
       }
 
-      return "file.jpg";
+      return 'file.jpg';
     };
 
     const ownAttachment =
-      typeof fileLike === "string" ||
-      fileLike instanceof Buffer ||
-      typeof fileLike.pipe === "function";
+      typeof fileLike === 'string' || fileLike instanceof Buffer || typeof fileLike.pipe === 'function';
     if (ownAttachment) {
       attachment = fileLike;
       name = findName(attachment);
@@ -310,9 +281,7 @@ class MessagePayload {
   static create(target, options, extra = {}) {
     return new this(
       target,
-      typeof options !== "object" || options === null
-        ? { content: options, ...extra }
-        : { ...options, ...extra }
+      typeof options !== 'object' || options === null ? { content: options, ...extra } : { ...options, ...extra },
     );
   }
 }
