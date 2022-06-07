@@ -1,17 +1,19 @@
 {
   "name": "@imxnoobx/djs-selfbot",
-  "version": "13.7.0",
+  "version": "13.8.0",
   "description": "A modified version of discord.js that supports user accounts",
   "scripts": {
     "test": "npm run docs:test && npm run lint:typings && npm run test:typescript",
     "test:typescript": "tsc --noEmit && tsd",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "lint:typings": "tslint typings/index.d.ts",
     "format": "prettier --write src/**/*.js typings/**/*.ts",
     "prepare": "is-ci || husky install",
     "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
     "docs:test": "docgen --source src --custom docs/index.yml",
     "prepublishOnly": "npm run test",
-    "changelog": "git cliff --prepend CHANGELOG.md -l"
+    "changelog": "git cliff --prepend CHANGELOG.md -u"
   },
   "main": "./src/index.js",
   "types": "./typings/index.d.ts",
@@ -28,9 +30,7 @@
     "Amish Shah <amishshah.2k@gmail.com>",
     "Vlad Frangu <kingdgrizzle@gmail.com>",
     "SpaceEEC <spaceeec@yahoo.com>",
-    "Antonio Roman <kyradiscord@gmail.com>",
-    "ItsBhuvnesh",
-    "IMXNOOBX"
+    "Antonio Roman <kyradiscord@gmail.com>"
   ],
   "license": "Apache-2.0",
   "keywords": [
@@ -43,45 +43,43 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/IMXNOOBX/djs-selfbot.git"
+    "url": "https://github.com/discordjs/discord.js.git"
   },
   "bugs": {
-    "url": "https://github.com/IMXNOOBX/djs-selfbot/issues"
+    "url": "https://github.com/discordjs/discord.js/issues"
   },
   "homepage": "https://discord.js.org",
   "dependencies": {
-    "@discordjs/builders": "^0.13.0",
-    "@discordjs/collection": "^0.6.0",
+    "@discordjs/builders": "^0.14.0",
+    "@discordjs/collection": "^0.7.0",
     "@sapphire/async-queue": "^1.3.1",
     "@types/node-fetch": "^2.6.1",
     "@types/ws": "^8.5.3",
-    "discord-api-types": "^0.30.0",
+    "discord-api-types": "^0.33.3",
     "form-data": "^4.0.0",
     "node-fetch": "^2.6.1",
-    "ws": "^8.6.0"
+    "ws": "^8.7.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
-    "@commitlint/config-angular": "^16.2.4",
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-angular": "^17.0.0",
     "@discordjs/docgen": "^0.11.1",
     "@favware/npm-deprecate": "^1.0.4",
-    "@types/node": "^16.11.12",
-    "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "@typescript-eslint/parser": "^5.25.0",
+    "@types/node": "^16.11.38",
     "conventional-changelog-cli": "^2.2.2",
     "dtslint": "^4.2.1",
-    "eslint": "^8.15.0",
+    "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
     "is-ci": "^3.0.1",
     "jest": "^28.1.0",
-    "lint-staged": "^12.4.1",
+    "lint-staged": "^13.0.0",
     "prettier": "^2.6.2",
     "tsd": "^0.20.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.6.4"
+    "typescript": "^4.7.3"
   },
   "engines": {
     "node": ">=16.6.0",
