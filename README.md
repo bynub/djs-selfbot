@@ -22,6 +22,8 @@
 - [13.6.1] Remove Rich Embeds For User Accounts
 + [13.6.1] Update: 13.5.0 -> 13.6.1
 + [13.6.0] Update: 13.5.0 -> 13.6.0
++ [13.7.0] Update: 13.6.0 -> 13.7.0
++ [13.8.0] Update: 13.7.0 -> 13.8.0
 ```
 
 ## 📣 About
