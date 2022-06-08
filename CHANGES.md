@@ -242,3 +242,22 @@ New
     return this;
   }
 ```
+
+**Path**: `/src/structures/interfaces/Application.js`
+
+**Function**
+Default
+```js
+  constructor(client, data) {
+    super(client);
+    this._patch(data);
+  }
+```
+New
+```js
+  constructor(client, data) {
+    super(client);
+    if (data)
+      this._patch(data);
+  }
+```

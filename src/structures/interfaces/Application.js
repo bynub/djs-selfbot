@@ -16,7 +16,8 @@ let deprecationEmittedForFetchAssets = false;
 class Application extends Base {
   constructor(client, data) {
     super(client);
-    this._patch(data);
+    if (data)
+      this._patch(data);
   }
 
   _patch(data) {
