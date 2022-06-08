@@ -160,20 +160,12 @@ class MessagePayload {
       this.isMessageManager
     ) {
       // eslint-disable-next-line eqeqeq
-<<<<<<< HEAD
-      flags = this.options.flags != null ? new MessageFlags(this.options.flags).bitfield : this.target.flags?.bitfield;
-    }
-
-    if (isInteraction && this.options.ephemeral) {
-      flags |= MessageFlags.FLAGS.EPHEMERAL;
-=======
       flags =
         this.options.flags != null
           ? new MessageFlags(this.options.flags).bitfield
           : this.target.flags?.bitfield;
     } else if (isInteraction && this.options.ephemeral) {
       flags = MessageFlags.FLAGS.EPHEMERAL;
->>>>>>> release
     }
 
     let allowedMentions =
@@ -243,12 +235,8 @@ class MessagePayload {
         "DeprecationError"
       );
       if (!this.data.content) {
-<<<<<<< HEAD
-        this.data.content = 'MessageEmbed is deprecated for user accounts. Use normal messages instead.';
-=======
         this.data.content =
           "MessageEmbed is deprecated for user accounts. Use normal messages instead.";
->>>>>>> release
       }
     }
 

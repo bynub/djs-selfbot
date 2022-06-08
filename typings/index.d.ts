@@ -2456,11 +2456,7 @@ export class TextInputComponent extends BaseMessageComponent {
   public static resolveStyle(style: TextInputStyleResolvable): TextInputStyle;
 }
 
-<<<<<<< HEAD
-export class ThreadChannel extends TextBasedChannelMixin(Channel) {
-=======
 export class ThreadChannel extends TextBasedChannelMixin(Channel, ['fetchWebhooks', 'createWebhook', 'setNSFW']) {
->>>>>>> release
   private constructor(guild: Guild, data?: RawThreadChannelData, client?: Client, fromInteraction?: boolean);
   public archived: boolean | null;
   public readonly archivedAt: Date | null;
@@ -2658,15 +2654,8 @@ export class Formatters extends null {
   public static userMention: typeof userMention;
 }
 
-<<<<<<< HEAD
-export class VoiceChannel extends BaseGuildVoiceChannel {
-=======
 export class VoiceChannel extends TextBasedChannelMixin(BaseGuildVoiceChannel, ['lastPinTimestamp', 'lastPinAt']) {
->>>>>>> release
-  public videoQualityMode: VideoQualityMode | null;
-  /** @deprecated Use manageable instead */
   public readonly editable: boolean;
-  public readonly speakable: boolean;
   public type: 'GUILD_VOICE';
   public rateLimitPerUser: number | null;
   public setBitrate(bitrate: number, reason?: string): Promise<VoiceChannel>;

@@ -308,11 +308,7 @@ class GuildChannelManager extends CachedManager {
       channel,
       position,
       relative,
-<<<<<<< HEAD
-      this.guild._sortedChannels(this),
-=======
       this.guild._sortedChannels(channel),
->>>>>>> release
       this.client.api.guilds(this.guild.id).channels,
       reason,
     );

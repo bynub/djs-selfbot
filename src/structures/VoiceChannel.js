@@ -2,11 +2,8 @@
 
 const process = require('node:process');
 const BaseGuildVoiceChannel = require('./BaseGuildVoiceChannel');
-<<<<<<< HEAD
-=======
 const TextBasedChannel = require('./interfaces/TextBasedChannel');
 const MessageManager = require('../managers/MessageManager');
->>>>>>> release
 const { VideoQualityModes } = require('../util/Constants');
 const Permissions = require('../util/Permissions');
 
@@ -18,8 +15,6 @@ let deprecationEmittedForEditable = false;
  * @implements {TextBasedChannel}
  */
 class VoiceChannel extends BaseGuildVoiceChannel {
-<<<<<<< HEAD
-=======
   constructor(guild, data, client) {
     super(guild, data, client, false);
 
@@ -32,7 +27,6 @@ class VoiceChannel extends BaseGuildVoiceChannel {
     this._patch(data);
   }
 
->>>>>>> release
   _patch(data) {
     super._patch(data);
 
@@ -41,12 +35,6 @@ class VoiceChannel extends BaseGuildVoiceChannel {
        * The camera video quality mode of the channel.
        * @type {?VideoQualityMode}
        */
-<<<<<<< HEAD
-      this.videoQualityMode = VideoQualityModes[data.videoQualityMode];
-    } else {
-      this.videoQualityMode ??= null;
-    }
-=======
       this.videoQualityMode = VideoQualityModes[data.video_quality_mode];
     } else {
       this.videoQualityMode ??= null;
@@ -71,7 +59,6 @@ class VoiceChannel extends BaseGuildVoiceChannel {
        */
       this.rateLimitPerUser = data.rate_limit_per_user;
     }
->>>>>>> release
   }
 
   /**
@@ -160,8 +147,6 @@ class VoiceChannel extends BaseGuildVoiceChannel {
     return this.edit({ videoQualityMode }, reason);
   }
 
-<<<<<<< HEAD
-=======
   // These are here only for documentation purposes - they are implemented by TextBasedChannel
   /* eslint-disable no-empty-function */
   get lastMessage() {}
@@ -177,7 +162,6 @@ class VoiceChannel extends BaseGuildVoiceChannel {
   setRateLimitPerUser() {}
   setNSFW() {}
 
->>>>>>> release
   /**
    * Sets the RTC region of the channel.
    * @name VoiceChannel#setRTCRegion
