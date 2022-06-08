@@ -208,9 +208,9 @@ class MessageEmbed {
      */
     this.provider = data.provider
       ? {
-        name: data.provider.name,
-        url: data.provider.url,
-      }
+          name: data.provider.name,
+          url: data.provider.url,
+        }
       : null;
 
     /**

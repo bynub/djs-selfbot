@@ -90,16 +90,6 @@ class BaseGuildTextChannel extends GuildChannel {
   }
 
   /**
-   * Sets whether this channel is flagged as NSFW.
-   * @param {boolean} [nsfw=true] Whether the channel should be considered NSFW
-   * @param {string} [reason] Reason for changing the channel's NSFW flag
-   * @returns {Promise<TextChannel>}
-   */
-  setNSFW(nsfw = true, reason) {
-    return this.edit({ nsfw }, reason);
-  }
-
-  /**
    * Sets the type of this channel (only conversion between text and news is supported)
    * @param {string} type The new channel type
    * @param {string} [reason] Reason for changing the channel's type
@@ -110,6 +100,7 @@ class BaseGuildTextChannel extends GuildChannel {
   }
 
   /**
+<<<<<<< HEAD
    * Fetches all webhooks for the channel.
    * @returns {Promise<Collection<Snowflake, Webhook>>}
    * @example
@@ -148,6 +139,8 @@ class BaseGuildTextChannel extends GuildChannel {
   }
 
   /**
+=======
+>>>>>>> release
    * Sets a new topic for the guild channel.
    * @param {?string} topic The new topic for the guild channel
    * @param {string} [reason] Reason for changing the guild channel's topic
@@ -221,6 +214,10 @@ class BaseGuildTextChannel extends GuildChannel {
   createMessageComponentCollector() {}
   awaitMessageComponent() {}
   bulkDelete() {}
+  fetchWebhooks() {}
+  createWebhook() {}
+  setRateLimitPerUser() {}
+  setNSFW() {}
 }
 
 TextBasedChannel.applyToClass(BaseGuildTextChannel, true);

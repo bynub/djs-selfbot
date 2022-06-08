@@ -1,5 +1,7 @@
 # Packages
 node_modules/
+.husky/
+.github/
 
 # Log files
 logs/
@@ -28,4 +30,3 @@ docs/docs.json
 .tmp/
 .idea/
 .DS_Store
-.yarn/
